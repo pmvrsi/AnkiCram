@@ -2,7 +2,7 @@
 
 <img src="https://cdn.hackclub.com/019c4d49-71ff-7533-af81-41a9611a58b0/logo1.png" alt="AnkiCram" width="160" />
 
-<video src="https://user-cdn.hackclub-assets.com/019c4a15-2fb2-76ac-826f-6503eb43fcda/ankicramdemo.mp4" autoplay loop muted playsinline controls width="100%"></video>
+put gif here cuz you cant put videos for a dumb reason
 
 **Anki addon for cramming your decks**
 
