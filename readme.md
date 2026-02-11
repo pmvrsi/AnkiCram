@@ -4,6 +4,10 @@
 
 put gif here cuz you cant put videos for a dumb reason
 
+<p align="center" width="100%">
+<video src="https://cdn.hackclub.com/019c4a15-2fb2-76ac-826f-6503eb43fcda/ankicramdemo.mp4" width="80%" controls></video>
+</p>
+
 **Anki addon for cramming your decks**
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/ankicram/releases)
