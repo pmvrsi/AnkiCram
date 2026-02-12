@@ -2,8 +2,6 @@
 
 <img src="https://cdn.hackclub.com/019c4d49-71ff-7533-af81-41a9611a58b0/logo1.png" alt="AnkiCram" width="160" />
 
-# AnkiCram
-
 **Anki addon for cramming your decks**
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/ankicram/releases)
