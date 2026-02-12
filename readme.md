@@ -14,7 +14,8 @@
 [**Features**](#-features) • [**Installation**](#-installation) • [**Usage**](#-usage) • [**Compatibility**](#-compatibility)
 
 <p align="center">
-<img src="https://cdn.hackclub.com/019c4d49-71ff-7533-af81-41a9611a58b0/logo1.png" alt="AnkiCram Logo" width="160" />
+<img src="https://user-cdn.hackclub-assets.com/019c512c-dc62-73c8-a4a5-f45df0509626/demodemoanki.gif" width="400" />
+
 
 
 </div>
