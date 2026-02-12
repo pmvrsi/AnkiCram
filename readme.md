@@ -2,8 +2,7 @@
 
 <img src="https://cdn.hackclub.com/019c4d49-71ff-7533-af81-41a9611a58b0/logo1.png" alt="AnkiCram" width="160" />
 
-<p align="center">
-<video src="https://github.com/user-attachments/assets/4dc50e61-fd6d-42a9-9f13-ffb09e936adc" width="70%" controls></video>
+
 </p>
 
 **Anki addon for cramming your decks**
@@ -13,6 +12,10 @@
 [![Anki](https://img.shields.io/badge/anki-2.1+-blue.svg)](https://apps.ankiweb.net/)
 
 [**Features**](#-features) • [**Installation**](#-installation) • [**Usage**](#-usage) • [**Compatibility**](#-compatibility)
+
+<p align="center">
+<img src="https://cdn.hackclub.com/019c4d49-71ff-7533-af81-41a9611a58b0/logo1.png" alt="AnkiCram Logo" width="160" />
+
 
 </div>
 
