@@ -46,7 +46,7 @@ https://github.com/user-attachments/assets/b0c26616-da85-4430-9dc0-7f65837e1ace
 ### Method 1: AnkiWeb (Recommended)
 1. Open Anki.
 2. Go to `Tools` → `Add-ons` → `Get Add-ons...`.
-3. Enter the add-on code: `[Coming Soon]`
+3. Enter the add-on code: `123859453`
 4. Restart Anki.
 
 ### Method 2: Manual Installation
