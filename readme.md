@@ -12,7 +12,7 @@
 
 [**Features**](#-features) • [**Installation**](#-installation) • [**Usage**](#-usage) • [**Compatibility**](#-compatibility)
 
-<img src="https://user-cdn.hackclub-assets.com/019c512c-dc62-73c8-a4a5-f45df0509626/demodemoanki.gif" width="400" />
+https://github.com/user-attachments/assets/b0c26616-da85-4430-9dc0-7f65837e1ace
 
 </div>
 
