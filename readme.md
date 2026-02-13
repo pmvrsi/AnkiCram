@@ -53,7 +53,7 @@ https://github.com/user-attachments/assets/b0c26616-da85-4430-9dc0-7f65837e1ace
 1. Download the latest release from [**Releases**](https://github.com/yourusername/ankicram/releases).
 2. Open Anki.
 3. Go to `Tools` → `Add-ons` → `View Files`.
-4. Extract the downloaded ZIP into the `addons21` folder.
+4. Extract the downloaded ZIP into the `addons` folder.
 5. Restart Anki.
 
 ---
