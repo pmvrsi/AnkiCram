@@ -6,7 +6,7 @@
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/ankicram/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Anki](https://img.shields.io/badge/anki-2.1+-blue.svg)](https://apps.ankiweb.net/)
+[![Anki](https://img.shields.io/badge/anki-2.1.50+-blue.svg)](https://apps.ankiweb.net/)
 
 [**Features**](#-features) • [**Installation**](#-installation) • [**Usage**](#-usage) • [**Compatibility**](#-compatibility)
 
