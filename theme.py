@@ -1,4 +1,7 @@
-VERSION = "v1.0.0"
+import re
+from aqt.qt import QColor
+
+VERSION = "v1.0.1"
 
 THEME = {
     "bg": "#030712",
@@ -22,20 +25,32 @@ STYLESHEET = f"""
     }}
     QScrollBar:vertical {{
         border: none;
-        background: {THEME['bg']};
-        width: 8px;
+        background: transparent;
+        width: 4px;
         margin: 0px; 
     }}
     QScrollBar::handle:vertical {{
         background: {THEME['glass_border']};
         min-height: 20px;
-        border-radius: 4px;
+        border-radius: 2px;
     }}
-    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0px; }}
+    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+        border: none;
+        background: none;
+        height: 0px;
+    }}
+    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {{
+        border: none;
+        background: none;
+        height: 0px;
+    }}
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
+        background: none;
+    }}
     QLineEdit {{
         padding: 12px;
         border: 1px solid {THEME['glass_border']};
-        border-radius: 12px;
+        border-radius: 8px;
         background: rgba(0, 0, 0, 0.3);
         color: {THEME['text']};
         font-size: 14px;
@@ -52,7 +67,7 @@ STYLESHEET = f"""
     QCheckBox::indicator {{
         width: 18px;
         height: 18px;
-        border-radius: 6px;
+        border-radius: 4px;
         border: 1px solid {THEME['glass_border']};
         background: rgba(255, 255, 255, 0.05);
     }}
@@ -65,3 +80,16 @@ STYLESHEET = f"""
         border: 1px solid {THEME['primary']};
     }}
 """
+
+
+def css_to_qcolor(css_str: str) -> QColor:
+    if not css_str or css_str == "transparent":
+        return QColor(0, 0, 0, 0)
+    
+    rgba_match = re.match(r"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", css_str)
+    if rgba_match:
+        r, g, b, a = rgba_match.groups()
+        return QColor(int(r), int(g), int(b), int(float(a) * 255))
+    
+    return QColor(css_str)
+

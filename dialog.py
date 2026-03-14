@@ -3,7 +3,7 @@ from aqt import mw
 from aqt.qt import *
 from aqt.utils import tooltip, showInfo
 from .theme import THEME, STYLESHEET
-from .widgets import ClickableLabel, StatCard, DeckSelectButton
+from .widgets import ClickableLabel, StatCard, DeckSelectButton, RoundedWidget, RoundedButton
 from .About import AboutDialog
 
 
@@ -20,12 +20,17 @@ class AnkiCramDialog(QDialog):
         self.infinite_loop_check = None
         self.persistent_deck_check = None
 
-        self.central = QWidget(self)
+        self.central = RoundedWidget(
+            bg_color=THEME['bg'],
+            border_color=THEME['glass_border'],
+            radius=24,
+            parent=self
+        )
         self.central.setObjectName("CentralWidget")
         self.central.setStyleSheet(f"""
             QWidget#CentralWidget {{
-                background-color: {THEME['bg']};
-                border: 1px solid {THEME['glass_border']};
+                background-color: transparent;
+                border: none;
                 border-radius: 24px;
             }}
         """ + STYLESHEET)
@@ -105,23 +110,21 @@ class AnkiCramDialog(QDialog):
         logo_container.addWidget(credit_wrapper)
 
         h_layout.addLayout(logo_container)
-        h_layout.addStretch()
 
-        close_btn = QPushButton("×")
+        close_btn = RoundedButton(
+            text="✕",
+            radius=14,
+            bg_color=THEME['glass'],
+            hover_color=THEME['primary'],
+            text_color=THEME['text_muted'],
+            hover_text_color="white",
+            parent=self
+        )
         close_btn.setFixedSize(36, 36)
+        close_font = QFont("Inter")
+        close_font.setPixelSize(20)
+        close_btn.setFont(close_font)
         close_btn.clicked.connect(self.reject)
-        close_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        close_btn.setStyleSheet(f"""
-            QPushButton {{
-                background: {THEME['glass']};
-                color: {THEME['text_muted']};
-                font-size: 24px;
-                border-radius: 18px;
-                border: none;
-                padding-bottom: 4px;
-            }}
-            QPushButton:hover {{ background: {THEME['primary']}; color: white; }}
-        """)
         h_layout.addWidget(close_btn)
 
         header.setLayout(h_layout)
@@ -207,7 +210,7 @@ class AnkiCramDialog(QDialog):
         self.content_layout.addWidget(scroll, 1)
 
         settings_frame = QFrame()
-        settings_frame.setStyleSheet(f"background: {THEME['glass']}; border: 1px solid {THEME['glass_border']}; border-radius: 16px;")
+        settings_frame.setStyleSheet(f"background: {THEME['glass']}; border: 1px solid {THEME['glass_border']}; border-radius: 10px;")
         settings_layout = QVBoxLayout()
         settings_layout.setContentsMargins(20, 20, 20, 20)
 
@@ -233,17 +236,22 @@ class AnkiCramDialog(QDialog):
         settings_frame.setLayout(settings_layout)
         self.content_layout.addWidget(settings_frame)
 
-        self.start_btn = QPushButton("Start Cram Session")
+        self.start_btn = RoundedButton(
+            text="Start Cram Session",
+            radius=27,
+            bg_color="#a78bfa",
+            hover_color="#6366f1",
+            text_color="white",
+            border_color="rgba(255, 255, 255, 0.2)",
+            border_width=1,
+            gradient=[(0, "#a78bfa"), (1, "#6366f1")],
+            parent=self
+        )
         self.start_btn.setFixedHeight(55)
-        self.start_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.start_btn.setStyleSheet(f"""
-            QPushButton {{
-                background: {THEME['primary_grad']};
-                color: white; font-weight: 700; font-size: 16px;
-                border-radius: 27px; border: 1px solid rgba(255,255,255,0.2);
-            }}
-            QPushButton:hover {{ background: {THEME['primary']}; }}
-        """)
+        start_font = QFont("Inter")
+        start_font.setPixelSize(16)
+        start_font.setWeight(QFont.Weight.Bold)
+        self.start_btn.setFont(start_font)
         self.start_btn.clicked.connect(self.start_cramming)
 
         btn_shadow = QGraphicsDropShadowEffect(self.start_btn)
@@ -257,7 +265,7 @@ class AnkiCramDialog(QDialog):
         addon = mw.ankicram_addon
 
         info_frame = QFrame()
-        info_frame.setStyleSheet(f"background: rgba(167, 139, 250, 0.1); border-radius: 16px; border: 1px solid {THEME['primary']};")
+        info_frame.setStyleSheet(f"background: rgba(167, 139, 250, 0.1); border-radius: 10px; border: 1px solid {THEME['primary']};")
         info_layout = QVBoxLayout()
         info_layout.setContentsMargins(20, 20, 20, 20)
 
@@ -282,7 +290,7 @@ class AnkiCramDialog(QDialog):
         stats_grid.addWidget(StatCard("⏱️", "Time", f"{elapsed:.0f}m"), 0, 0)
         stats_grid.addWidget(StatCard("✅", "Reviews", str(addon.session_cards_reviewed)), 0, 1)
         stats_grid.addWidget(StatCard("🧠", "Retention", f"{retention:.0f}%", THEME['secondary']), 1, 0)
-        stats_grid.addWidget(StatCard("🔄", "Re-Loops", str(addon.session_cards_failed), THEME['primary']), 1, 1)
+        stats_grid.addWidget(StatCard("🔄", "Re-Loops", str(addon.session_reloops), THEME['primary']), 1, 1)
 
         self.content_layout.addLayout(stats_grid)
         self.content_layout.addStretch()
@@ -290,28 +298,37 @@ class AnkiCramDialog(QDialog):
         btn_layout = QHBoxLayout()
         btn_layout.setSpacing(15)
 
-        rebuild_btn = QPushButton("Rebuild Deck")
+        rebuild_btn = RoundedButton(
+            text="Rebuild Deck",
+            radius=25,
+            bg_color="transparent",
+            hover_color=THEME['glass_hover'],
+            text_color=THEME['text'],
+            border_color=THEME['glass_border'],
+            border_width=1
+        )
         rebuild_btn.setFixedHeight(50)
-        rebuild_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        rebuild_btn.setStyleSheet(f"""
-            QPushButton {{
-                background: transparent; color: {THEME['text']};
-                border: 1px solid {THEME['glass_border']}; border-radius: 25px; font-weight: 600;
-            }}
-            QPushButton:hover {{ border: 1px solid {THEME['text']}; background: {THEME['glass_hover']}; }}
-        """)
+        rebuild_font = QFont("Inter")
+        rebuild_font.setPixelSize(13)
+        rebuild_font.setWeight(QFont.Weight.DemiBold)
+        rebuild_btn.setFont(rebuild_font)
         rebuild_btn.clicked.connect(self.rebuild_deck)
 
-        stop_btn = QPushButton("End Session")
+        stop_btn = RoundedButton(
+            text="End Session",
+            radius=25,
+            bg_color=THEME['danger_bg'],
+            hover_color=THEME['danger'],
+            text_color=THEME['danger'],
+            hover_text_color="white",
+            border_color="rgba(239, 68, 68, 0.3)",
+            border_width=1
+        )
         stop_btn.setFixedHeight(50)
-        stop_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        stop_btn.setStyleSheet(f"""
-            QPushButton {{
-                background: {THEME['danger_bg']}; color: {THEME['danger']};
-                border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 25px; font-weight: 600;
-            }}
-            QPushButton:hover {{ background: {THEME['danger']}; color: white; }}
-        """)
+        stop_font = QFont("Inter")
+        stop_font.setPixelSize(13)
+        stop_font.setWeight(QFont.Weight.DemiBold)
+        stop_btn.setFont(stop_font)
         stop_btn.clicked.connect(self.stop_cramming)
 
         btn_layout.addWidget(rebuild_btn)
@@ -607,10 +624,11 @@ class AnkiCramDialog(QDialog):
             addon = mw.ankicram_addon
             addon.current_cram_did = None
             addon.current_cram_name = None
-            addon.session_start_time = None
             addon.failed_cards = set()
             addon.session_cards_reviewed = 0
             addon.session_cards_failed = 0
+            addon.session_reloops = 0
+            addon.session_start_time = time.time()
             addon.hide_corner_widget()
 
             showInfo(f"Session ended with errors: {str(e)}\n\nYou may need to manually delete the AnkiCram deck.")
