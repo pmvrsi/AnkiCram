@@ -18,7 +18,7 @@ THEME = {
 STYLESHEET = f"""
     QLabel {{
         color: {THEME['text']};
-        font-family: 'Inter', 'Segoe UI', sans-serif;
+        font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
     }}
     QScrollBar:vertical {{
         border: none;

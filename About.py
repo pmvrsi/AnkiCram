@@ -64,7 +64,7 @@ class AboutDialog(QDialog):
         credit = QLabel()
         credit.setTextFormat(Qt.TextFormat.RichText)
         credit.setOpenExternalLinks(True)
-        credit.setText(f"Project by <a href='https://paramveer.co.uk' style='font-family: Georgia, serif; color: {THEME['primary']}; text-decoration: none;'><i>Paramveer.</i></a>")
+        credit.setText(f"Project by <a href='https://paramveer.co.uk' style='font-family: \"EB Garamond\", Georgia, serif; color: {THEME['primary']}; text-decoration: none;'><i>Paramveer.</i></a>")
         credit.setAlignment(Qt.AlignmentFlag.AlignCenter)
         credit.setStyleSheet(f"""
             font-size: 13px;

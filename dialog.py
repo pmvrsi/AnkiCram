@@ -73,11 +73,11 @@ class AnkiCramDialog(QDialog):
 
         credit = QLabel()
         credit.setTextFormat(Qt.TextFormat.RichText)
-        credit.setText("Project by <i style='font-family: \"EB Garamond\", serif;'>Paramveer.</i>")
+        credit.setText("Project by <i style='font-family: \"EB Garamond\", Georgia, serif;'>Paramveer.</i>")
         credit.setStyleSheet(f"""
             font-size: 11px; 
             font-weight: 500; 
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
             color: {THEME['text_muted']}; 
             border: none; 
             background: transparent;

@@ -122,7 +122,7 @@ class CramCornerWidget(QPushButton):
         self.label = QLabel()
         self.label.setText(f"<span style='color:{THEME['text']}; font-weight:800;'>Anki</span><span style='color:{THEME['primary']}; font-weight:800;'>Cram.</span>")
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.label.setStyleSheet("background: transparent; border: none; font-size: 18px; font-family: 'Segoe UI', sans-serif;")
+        self.label.setStyleSheet("background: transparent; border: none; font-size: 18px; font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;")
         layout.addWidget(self.label)
 
         self.setStyleSheet(f"""

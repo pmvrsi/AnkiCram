@@ -1,6 +1,15 @@
+import os
 from aqt import mw
 from aqt.qt import *
 from aqt import gui_hooks
+
+# Load bundled fonts so they work on all systems
+_fonts_dir = os.path.join(os.path.dirname(__file__), "fonts")
+if os.path.isdir(_fonts_dir):
+    for _font_file in os.listdir(_fonts_dir):
+        if _font_file.endswith((".ttf", ".otf")):
+            QFontDatabase.addApplicationFont(os.path.join(_fonts_dir, _font_file))
+
 from .addon import AnkiCramAddon
 
 addon = AnkiCramAddon()
