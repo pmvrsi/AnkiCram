@@ -1,5 +1,6 @@
 from aqt.qt import *
 from .theme import THEME, VERSION
+from .widgets import RoundedWidget, RoundedButton
 
 
 class AboutDialog(QDialog):
@@ -7,17 +8,22 @@ class AboutDialog(QDialog):
         super().__init__(parent)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.Dialog)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setFixedSize(420, 480)
+        self.setFixedSize(420, 540)
         self.setup_ui()
         self._drag_pos = None
 
     def setup_ui(self):
-        container = QWidget(self)
+        container = RoundedWidget(
+            bg_color=THEME['bg'],
+            border_color=THEME['glass_border'],
+            radius=16,
+            parent=self
+        )
         container.setObjectName("AboutContainer")
         container.setStyleSheet(f"""
             QWidget#AboutContainer {{
-                background-color: {THEME['bg']};
-                border: 1px solid {THEME['glass_border']};
+                background-color: transparent;
+                border: none;
                 border-radius: 20px;
             }}
         """)
@@ -31,20 +37,20 @@ class AboutDialog(QDialog):
         layout.setSpacing(0)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        close_btn = QPushButton("×")
+        close_btn = RoundedButton(
+            text="✕",
+            radius=14,
+            bg_color=THEME['glass'],
+            hover_color=THEME['primary'],
+            text_color=THEME['text_muted'],
+            hover_text_color="white",
+            parent=self
+        )
         close_btn.setFixedSize(28, 28)
+        close_font = QFont("Inter")
+        close_font.setPixelSize(18)
+        close_btn.setFont(close_font)
         close_btn.clicked.connect(self.accept)
-        close_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        close_btn.setStyleSheet(f"""
-            QPushButton {{
-                background: {THEME['glass']};
-                color: {THEME['text_muted']};
-                font-size: 18px;
-                border-radius: 14px;
-                border: none;
-            }}
-            QPushButton:hover {{ background: {THEME['primary']}; color: white; }}
-        """)
 
         close_container = QHBoxLayout()
         close_container.addStretch()
@@ -146,24 +152,22 @@ class AboutDialog(QDialog):
 
         layout.addSpacing(20)
 
-        github_btn = QPushButton("GitHub")
+        github_btn = RoundedButton(
+            text="GitHub",
+            radius=20,
+            bg_color="transparent",
+            hover_color=THEME['glass_hover'],
+            text_color=THEME['text'],
+            border_color=THEME['glass_border'],
+            border_width=1,
+            parent=self
+        )
         github_btn.setFixedHeight(44)
         github_btn.setFixedWidth(160)
-        github_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        github_btn.setStyleSheet(f"""
-            QPushButton {{
-                background: transparent;
-                color: {THEME['text']};
-                border: 1px solid {THEME['glass_border']};
-                border-radius: 22px;
-                font-weight: 600;
-                font-size: 14px;
-            }}
-            QPushButton:hover {{
-                border: 1px solid {THEME['primary']};
-                background: {THEME['glass_hover']};
-            }}
-        """)
+        github_font = QFont("Inter")
+        github_font.setPixelSize(14)
+        github_font.setWeight(QFont.Weight.DemiBold)
+        github_btn.setFont(github_font)
         github_btn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl("https://github.com/pmvrsi/AnkiCram/")))
 
         github_container = QHBoxLayout()
@@ -172,7 +176,38 @@ class AboutDialog(QDialog):
         github_container.addStretch()
         layout.addLayout(github_container)
 
+        layout.addSpacing(12)
+
+        changelog_btn = RoundedButton(
+            text="Changelog",
+            radius=20,
+            bg_color="transparent",
+            hover_color=THEME['glass_hover'],
+            text_color=THEME['text'],
+            border_color=THEME['glass_border'],
+            border_width=1,
+            parent=self
+        )
+        changelog_btn.setFixedHeight(44)
+        changelog_btn.setFixedWidth(160)
+        changelog_font = QFont("Inter")
+        changelog_font.setPixelSize(14)
+        changelog_font.setWeight(QFont.Weight.DemiBold)
+        changelog_btn.setFont(changelog_font)
+        changelog_btn.clicked.connect(self.show_changelog)
+
+        changelog_container = QHBoxLayout()
+        changelog_container.addStretch()
+        changelog_container.addWidget(changelog_btn)
+        changelog_container.addStretch()
+        layout.addLayout(changelog_container)
+
         layout.addStretch()
+
+    def show_changelog(self):
+        from .Changelog import ChangelogDialog
+        dialog = ChangelogDialog(self)
+        dialog.exec()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
