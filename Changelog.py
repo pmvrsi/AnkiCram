@@ -125,10 +125,8 @@ class ChangelogDialog(QDialog):
         content_layout.setContentsMargins(0, 0, 15, 0)
 
         changes = [
-            ("Windows UI Fix", "UI has been fixed where it was boxy and unrounded. Now it's rounded on Windows, matching the macOS version."),
-            ("Imported Fonts", "Premium Inter and Garamond fonts are now imported directly with the extension for a consistent look on all systems."),
-            ("Accurate Retention", "Fixed session stats. The retention percentage now correctly tracks your 'Again' answers."),
-            ("Re-Loop Tracking", "Fixed the Re-Loops counter to correctly show how many times the deck has been rebuilt."),
+            ("Again Button Bug Fix", "Hitting 'Again' on a card was accidentally rebuilding the entire cram deck every time, reshuffling all cards and breaking the session. It now correctly just marks the card for retry."),
+            ("Re-Loop Counter Fix", "The Re-Loops stat was counting every failed card as a loop. It now correctly counts how many times you've rebuilt the deck via the Rebuild Deck button."),
         ]
 
         for title, desc in changes:

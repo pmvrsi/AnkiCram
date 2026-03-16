@@ -1,7 +1,7 @@
 import re
 from aqt.qt import QColor
 
-VERSION = "v1.0.1"
+VERSION = "v1.0.2"
 
 THEME = {
     "bg": "#030712",

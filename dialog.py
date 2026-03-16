@@ -455,6 +455,7 @@ class AnkiCramDialog(QDialog):
                 except Exception:
                     pass
 
+            addon.session_reloops += 1
             tooltip(f"✅ Deck rebuilt! ({cards_moved} cards)", period=2000)
             mw.reset()
             self.accept()
@@ -548,6 +549,7 @@ class AnkiCramDialog(QDialog):
             addon.session_start_time = time.time()
             addon.session_cards_reviewed = 0
             addon.session_cards_failed = 0
+            addon.session_reloops = 0
             addon.infinite_loop_enabled = self.infinite_loop_check.isChecked() if self.infinite_loop_check else True
             addon.persistent_deck_mode = self.persistent_deck_check.isChecked() if self.persistent_deck_check else False
             addon.current_cram_did = cram_did
