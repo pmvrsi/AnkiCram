@@ -21,10 +21,7 @@ class AnkiCramAddon:
         self.base_search = ""
         self.failed_cards = set()
         self.corner_widget = None
-        self._rebuild_timer = QTimer()
-        self._rebuild_timer.setSingleShot(True)
-        self._rebuild_timer.timeout.connect(self._do_delayed_rebuild)
-        
+
         QTimer.singleShot(1000, self.check_for_update)
 
     def is_active_session(self):
@@ -60,23 +57,10 @@ class AnkiCramAddon:
         if self.corner_widget:
             self.corner_widget.hide()
 
-    def rebuild_filtered_deck(self):
-        if not self.is_active_session():
-            return
-        self._rebuild_timer.start(200)
-
-    def _do_delayed_rebuild(self):
-        try:
-            if self.is_active_session():
-                mw.col.sched.rebuild_filtered_deck(self.current_cram_did)
-                self.session_reloops += 1
-        except Exception:
-            pass
-
     def on_answer_card(self, reviewer, card, ease):
         if not self.is_active_session():
             return
-            
+
         target_did = self.current_cram_did
         if card.did != target_did and card.odid != target_did:
             return
@@ -92,6 +76,7 @@ class AnkiCramAddon:
             self.session_cards_failed += 1
             if self.infinite_loop_enabled:
                 self.failed_cards.add(card.id)
-                self.rebuild_filtered_deck()
         else:
             self.failed_cards.discard(card.id)
+
+
